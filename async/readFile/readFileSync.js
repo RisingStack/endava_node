@@ -1,4 +1,5 @@
 'use strict'
+
 const fs = require('fs')
 const countLines = require('../util/countLines') // realtive to script file
 let content1

@@ -1,4 +1,5 @@
 'use strict'
+
 const countLines = require('../util/countLines') // realtive to script file
 const readFilePromise = require('../promise/promisify')
 

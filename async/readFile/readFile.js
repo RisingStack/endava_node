@@ -1,15 +1,16 @@
 'use strict'
+
 const fs = require('fs')
 const countLines = require('../util/countLines') // realtive to script file
 
-fs.readFile('./test-file.txt', 'utf-8', function (err, content1) { // relative to working directory
+fs.readFile('./test-file.txt', 'utf-8', (err, content1) => { // relative to working directory
   if (err) {
     console.error(err)
     process.exit(1)
   }
 
   const lineNo1 = countLines(content1)
-  fs.readFile('./test-file2.txt', 'utf-8', function (err, content2) {
+  fs.readFile('./test-file2.txt', 'utf-8', (err, content2) => {
     if (err) {
       console.error(err)
       process.exit(1)
