@@ -1,6 +1,5 @@
 'use strict'
 
-const joi = require()
 const db = require('../db')
 const COLLECTION_NAME = 'comment'
 
