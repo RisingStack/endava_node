@@ -5,46 +5,34 @@ const { expect } = require('chai')
 const user = require('./user')
 
 describe('User model', () => {
-  const  API_URL = 'https://api.github.com'
-  const API_CONFIG = {
+  const githubApi = nock('https://api.github.com', {
     reqheaders: {
       accept: 'application/vnd.github.v3+json',
-      'user-agent': 'RisingStack-Bootcamp'
+      'user-agent': 'Endava-Training'
     }
-  }
+  })
 
   describe('getUsers', () => {
     it('should get a list of users', async () => {
-      const githubAPI = nock(API_URL, API_CONFIG)
+      const getUsersFromApi = githubApi
         .get('/users')
-        .reply(200, { users: [] })
+        .reply(200, [])
 
       const users = await user.getUsers()
-      expect(githubAPI.isDone()).to.be.true
-      expect(users).to.eql({ users: [] })
-    })
-
-    it('should respect the fromId parameter', async () => {
-      const githubAPI = nock(API_URL, API_CONFIG)
-        .get('/users')
-        .query({ since: 13 })
-        .reply(200, { users: [] })
-
-      const users = await user.getUsers(13)
-      expect(githubAPI.isDone()).to.be.true
-      expect(users).to.eql({ users: [] })
+      expect(getUsersFromApi.isDone()).to.be.true
+      expect(users).to.eql([])
     })
   })
 
   describe('getUserById', () => {
     it('should get a user by id', async () => {
-      const githubAPI = nock(API_URL, API_CONFIG)
+      const getUserFromApi = githubApi
         .get('/users/12')
-        .reply(200, { id: 12, name: 'User' })
+        .reply(200, { id: 12, login: 'User' })
 
       const users = await user.getUserById(12)
-      expect(githubAPI.isDone()).to.be.true
-      expect(users).to.eql({ id: 12, name: 'User' })
+      expect(getUserFromApi.isDone()).to.be.true
+      expect(users).to.eql({ id: 12, login: 'User' })
     })
   })
 })

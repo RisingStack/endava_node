@@ -1,3 +1,4 @@
 'use strict'
 
-require('./web')
+require('dotenv').config()
+require('./web').init()

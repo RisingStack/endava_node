@@ -4,7 +4,7 @@ const joi = require('joi')
 const userModel = require('../../../models/user')
 
 const querySchema = joi.object({
-  q: joi.string(),
+  q: joi.string().required(),
   sort: joi.valid(['followers', 'repositories', 'joined']),
   order: joi.valid(['asc', 'desc'])
 })

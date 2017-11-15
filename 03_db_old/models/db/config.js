@@ -3,7 +3,7 @@
 const joi = require('joi')
 
 const schema = joi.object({
-  MONGO_URI: joi.string().uri({ scheme: 'mongodb' }).required()
+  MONGO_URI: joi.string().uri({ scheme: 'mongo' }).required()
 }).unknown().required()
 
 const envVars = joi.attempt(process.env, schema)

@@ -8,10 +8,10 @@ const fetch = axios.create(config)
 
 async function getUsers (query) {
   const resp = await fetch({
-    url: '/users',
+    url: '/search/users',
     params: query
   })
-  return resp.data.map(pickUserFields)
+  return resp.data.items.map(pickUserFields)
 }
 
 async function getUserById (userId) {

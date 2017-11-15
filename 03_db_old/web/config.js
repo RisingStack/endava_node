@@ -3,11 +3,11 @@
 const joi = require('joi')
 
 const schema = joi.object({
-  MONGO_URI: joi.string().uri({ scheme: 'mongodb' }).required()
+  PORT: joi.number().integer().min(0).max(65535).default(3000)
 }).unknown().required()
 
 const envVars = joi.attempt(process.env, schema)
 
 module.exports = {
-  uri: envVars.MONGO_URI
+  port: envVars.PORT
 }

@@ -4,19 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test-unit": "NODE_ENV=test mocha server/**/*unit.spec.js",
-    "test-e2e": "NODE_ENV=test mocha server/**/*e2e.spec.js",
-    "test-unit-watch": "NODE_ENV=test mocha --watch server/**/*unit.spec.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test-unit": "NODE_ENV=test mocha ./test/setup.js ./**/*.unit.spec.js",
+    "test-e2e": "NODE_ENV=test mocha ./test/setup.js ./**/*.e2e.spec.js",
+    "test-unit-dev": "NODE_ENV=test mocha --watch ./test/setup.js ./**/*unit.spec.js",
     "test": "npm run test-unit && npm run test-e2e"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
+    "es6-promisify": "^5.0.0",
     "express": "^4.15.3",
     "forever-agent": "^0.6.1",
     "joi": "^10.5.2",
     "json-stringify-safe": "^5.0.1",
-    "request-promise-native": "^1.0.5"
+    "lodash": "^4.17.4",
+    "mongodb": "^2.2.33"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-subset": "^1.6.0",
+    "dotenv": "^4.0.0",
+    "mocha": "^4.0.1",
+    "nock": "^9.1.0",
+    "nodemon": "^1.12.1",
+    "sinon": "^4.1.2",
+    "sinon-chai": "^2.14.0",
+    "super-request": "^1.2.0"
   }
 }
