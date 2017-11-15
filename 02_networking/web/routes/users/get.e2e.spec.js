@@ -7,12 +7,13 @@ const server = require('../../server')
 
 describe('GET /api/v1/users', () => {
   it('should get the users', async () => {
-    const users = await request(server.listen())
-      .get('/users')
+    const resp = await request(server)
+      .get('/api/v1/users')
+      .json(true)
       .expect(200)
       .end()
 
-    // expect getUsers to be called
-    // expect(users).to.eql({ users: [] })
+    expect(resp.body).to.be.instanceof(Array)
+    expect(resp.body).to.have.lengthOf.above(0)
   })
 })
