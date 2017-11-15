@@ -4,5 +4,6 @@ module.exports = {
   get: require('./get'),
   getById: require('./getById'),
   post: require('./post'),
-  delete: require('./delete')
+  delete: require('./delete'),
+  deleteById: require('./deleteById')
 }

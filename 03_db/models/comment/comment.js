@@ -1,24 +1,38 @@
 'use strict'
 
+const joi = require()
 const db = require('../db')
 const COLLECTION_NAME = 'comment'
 
-async function init () {
-  db.connection.createCollection(COLLECTION_NAME, {
-    validator: {
-
-    }
-  })
-}
-
-async function addComment () {
+function getCommentById (commentId) {
   const comments = db.connection.collection(COLLECTION_NAME)
-  await comments.insert({ a: 12 })
+  return comments.findOne({ _id: commentId })
 }
 
+async function getCommentsForUser (userId) {
+  const comments = db.connection.collection(COLLECTION_NAME)
+  return comments.find({ user: userId })
+}
 
+function addComment (comment) {
+  const comments = db.connection.collection(COLLECTION_NAME)
+  return comments.insertOne(comment)
+}
+
+function deleteCommentById (commentId) {
+  const comments = db.connection.collection(COLLECTION_NAME)
+  return comments.deleteOne({ _id: commentId })
+}
+
+function deleteCommentsForUser (userId) {
+  const comments = db.connection.collection(COLLECTION_NAME)
+  return comments.deleteMany({ user: userId })
+}
 
 module.exports = {
-  init,
-  addComment
+  getCommentById,
+  getCommentsForUser,
+  addComment,
+  deleteCommentById,
+  deleteCommentsForUser
 }

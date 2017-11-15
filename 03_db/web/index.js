@@ -4,7 +4,6 @@ const promisify = require('es6-promisify')
 const server = require('./server')
 const config = require('./config')
 const db = require('../models/db')
-const comment = require('../models/comment')
 
 // explain why graceful stop is important (order of components)
 process.on('SIGTERM', async () => {
@@ -17,7 +16,6 @@ const initServer = promisify(server.listen, server)
 async function init () {
   try {
     await db.init()
-    await comment.init()
     await initServer(config.port)
   } catch (err) {
     console.log(`Couldn't init the app: ${err}`)
