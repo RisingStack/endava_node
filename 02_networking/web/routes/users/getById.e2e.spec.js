@@ -3,7 +3,7 @@
 const nock = require('nock')
 const { expect } = require('chai')
 const request = require('super-request')
-const server = require('../../../server')
+const server = require('../../server')
 
 describe('GET /api/v1/users/:id', () => {
   it('should get the user with a specific id', async () => {

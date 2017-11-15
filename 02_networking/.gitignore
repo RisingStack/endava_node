@@ -65,3 +65,4 @@ typings/
 
 # dotenv files with env vars
 .env
+.env.test

@@ -9,10 +9,10 @@ const schema = joi.object({
 const envVars = joi.attempt(process.env, schema)
 
 module.exports = {
-  baseUrl: envVars.USER_API_URL,
+  baseURL: envVars.USER_API_URL,
+  timeout: 5000,
   headers: {
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'Endava-Training'
-  },
-  json: true
+  }
 }

@@ -1,15 +1,11 @@
 'use strict'
 
 const nock = require('nock')
-const chai = require('chai')
+const { expect } = require('chai')
 const sinon = require('sinon')
-const sinonChai = require('sinon-chai')
 const request = require('super-request')
 const user = require('../../../models/user')
-const server = require('../../../server')
-
-chai.use(sinonChai)
-const { expect } = chai
+const server = require('../../server')
 
 describe('GET /api/v1/users/:id', () => {
   let sandbox
@@ -23,13 +19,12 @@ describe('GET /api/v1/users/:id', () => {
   })
 
   it('should get the user with the specific id from the user model', async () => {
-    const getUserById = sandbox.stub(user, 'getUserById').returns({ id: 12, name: 'Bob' })
-    const user = await request(server.listen())
-      .get('/users/12')
-      .expect(200)
+    const getUserById = sandbox.stub(user, 'getUserById').returns({ id: 12, login: 'Bob' })
+    await request(server)
+      .get('/api/v1/users/12')
+      .expect(200, { id: 12, login: 'Bob' })
       .end()
 
-    // expect getUsers to be called
-    expect(user).to.eql({ id: 12, name: 'Bob' })
+    expect(getUserById).to.be.calledOnce
   })
 })
