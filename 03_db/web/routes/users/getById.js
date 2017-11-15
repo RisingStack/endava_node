@@ -4,12 +4,12 @@ const joi = require('joi')
 const userModel = require('../../../models/user')
 
 const paramsSchema = joi.object({
-  userId: joi.number().integer().required()
+  userId: joi.string().min(1).required()
 }).required()
 
 async function getUserById (req, res) {
-  const params = joi.attempt(req.params, paramsSchema)
-  const user = await userModel.getUserById(params.userId)
+  const { userId } = joi.attempt(req.params, paramsSchema)
+  const user = await userModel.getUserById(userId)
   res.send(user)
 }
 

@@ -4,7 +4,7 @@ const joi = require('joi')
 const userModel = require('../../../models/user')
 
 const paramsSchema = joi.object({
-  userId: joi.number().integer().required()
+  userId: joi.string().min(1).required()
 }).required()
 
 async function getUserById (req, res) {

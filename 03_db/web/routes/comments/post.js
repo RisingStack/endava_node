@@ -1,9 +1,10 @@
 'use strict'
 
-const comment = require('../../../models/comment')
+const commentModel = require('../../../models/comment')
 
 async function addComment (req, res) {
-  res.status(201).send('Added Comment Successfully!')
+  await commentModel.addComment(req.body)
+  res.status(201).send('Comment Added Successfully')
 }
 
 module.exports = addComment
