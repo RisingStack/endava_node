@@ -1,0 +1,29 @@
+{
+  "name": "skeleton",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test-unit": "NODE_ENV=test mocha **/*unit.spec.js",
+    "test-e2e": "NODE_ENV=test mocha **/*e2e.spec.js",
+    "test-unit-dev": "NODE_ENV=test mocha --watch **/*unit.spec.js",
+    "test": "npm run test-unit && npm run test-e2e"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "es6-promisify": "^5.0.0",
+    "forever-agent": "^0.6.1",
+    "joi": "^10.5.2",
+    "json-stringify-safe": "^5.0.1",
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0",
+    "nodemon": "^1.12.1"
+  }
+}
