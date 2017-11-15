@@ -21,7 +21,7 @@ describe('GET /api/v1/users', () => {
   it('should get the users from the user model', async () => {
     const getUsers = sandbox.stub(user, 'getUsers').returns({ users: [] })
     const users = await request(server)
-      .get('/api/v1/users')
+      .get('/api/v1/users?q=bo')
       .expect(200, { users: [] })
       .end()
 

@@ -15,10 +15,10 @@ describe('User model', () => {
   describe('getUsers', () => {
     it('should get a list of users', async () => {
       const getUsersFromApi = githubApi
-        .get('/users')
-        .reply(200, [])
+        .get('/search/users?q=ta')
+        .reply(200, { items: [] })
 
-      const users = await user.getUsers()
+      const users = await user.getUsers({ q: 'ta' })
       expect(getUsersFromApi.isDone()).to.be.true
       expect(users).to.eql([])
     })
