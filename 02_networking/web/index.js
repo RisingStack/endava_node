@@ -6,7 +6,10 @@ const config = require('./config')
 const http = require('http')
 
 // explain why graceful stop is important (order of components)
-process.on('SIGTERM', stop)
+process.on('SIGTERM', async () => {
+  const exitCode = await stop()
+  process.exit(exitCode)
+})
 
 // do not init the process if a crucial component can not start up
 const initServer = promisify(server.listen, server)
@@ -23,8 +26,15 @@ async function init () {
 
 const closeServer = promisify(server.close, server)
 async function stop () {
-  await closeServer()
-  // process.exit(0)
+  // start with a normal exit code
+  let exitCode = 0
+  try {
+    await closeServer()
+  } catch (err) {
+    console.log(`Failed to close the server: ${err}`)
+    exitCode = 1
+  }
+  return exitCode
 }
 
 module.exports = {
