@@ -17,7 +17,7 @@ async function init () {
   try {
     await initServer(config.port)
   } catch (err) {
-    console.log(`Couldn't init thess app: ${err}`)
+    console.log(`Couldn't init the app: ${err}`)
     // exit code for fatal exception
     process.exit(1)
   }

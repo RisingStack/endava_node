@@ -20,11 +20,10 @@ async function init () {
     await comment.init()
     await initServer(config.port)
   } catch (err) {
-    console.log(`Couldn't init thess app: ${err}`)
+    console.log(`Couldn't init the app: ${err}`)
     // exit code for fatal exception
     process.exit(1)
   }
-  comment.addComment()
   console.log(`App is listening on port ${config.port}`)
 }
 
