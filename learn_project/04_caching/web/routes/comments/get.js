@@ -8,6 +8,7 @@ const paramsSchema = joi.object({
 }).required()
 
 async function getComments (req, res) {
+  req.apicacheGroup = req.params.userId
   const { userId } = joi.attempt(req.params, paramsSchema)
   const comments = await commentModel.getCommentsForUser(userId)
   res.send(comments)
