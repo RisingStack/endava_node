@@ -17,7 +17,7 @@ async function init () {
   try {
     await initServer(config.port)
   } catch (err) {
-    console.log(`Couldn't init the app: ${err}`)
+    console.error(`Couldn't init the app: ${err}`)
     // exit code for fatal exception
     process.exit(1)
   }
@@ -31,7 +31,7 @@ async function stop () {
   try {
     await closeServer()
   } catch (err) {
-    console.log(`Failed to close the server: ${err}`)
+    console.error(`Failed to close the server: ${err}`)
     exitCode = 1
   }
   return exitCode

@@ -16,10 +16,10 @@ process.on('SIGTERM', async () => {
 const initServer = promisify(server.listen, server)
 async function init () {
   try {
-    await Promise.all([redis.init(), db.init()])
+    await db.init()
     await initServer(config.port)
   } catch (err) {
-    console.log(`Couldn't init the app: ${err}`)
+    console.error(`Couldn't init the app: ${err}`)
     // exit code for fatal exception
     process.exit(1)
   }
@@ -33,21 +33,21 @@ async function stop () {
   try {
     await closeServer()
   } catch (err) {
-    console.log(`Failed to close the server: ${err}`)
+    console.error(`Failed to close the server: ${err}`)
     exitCode = 1
   }
 
   try {
     await db.close()
   } catch (err) {
-    console.log(`Failed to close the db: ${err}`)
+    console.error(`Failed to close the db: ${err}`)
     exitCode = 1
   }
 
   try {
     await redis.close()
   } catch (err) {
-    console.log(`Failed to close redis: ${err}`)
+    console.error(`Failed to close redis: ${err}`)
     exitCode = 1
   }
 
