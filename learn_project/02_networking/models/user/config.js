@@ -11,7 +11,7 @@ const envVars = joi.attempt(
 module.exports = {
   baseURL: envVars.USER_API_URL,
   headers: {
-    Authorization: `token ${USER_API_TOKEN}`,
+    Authorization: `token ${envVars.USER_API_TOKEN}`,
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'Endava-Training'
   }

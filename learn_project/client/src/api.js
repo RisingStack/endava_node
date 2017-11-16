@@ -31,7 +31,7 @@ export async function addComment (body) {
   return resp.data
 }
 
-export async function deleteCommentsForUser (commentId) {
+export async function deleteComment (commentId) {
   const resp = await fetch({
     method: 'DELETE',
     url: `/comments/${commentId}`

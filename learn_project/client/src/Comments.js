@@ -22,19 +22,23 @@ class Comments extends Component {
     }
 
     return (
-      <div className='comments'>
-        <div className="header">
+      <div>
+        <div className="profile">
+          <img src={store.user.avatar_url} />
           <h2>{store.user.login}</h2>
-          <img src={store.user.avatar_url} height='200' />
         </div>
-        <ul>
-          {store.comments.map(comment => <li key={comment._id}>{comment.text}</li>)}
-          <li>
-            HI
-            <textarea value={store.commentText} onChange={this.onChange} />
-            <button onClick={this.onClick}>Add Comment</button>
-          </li>
+        <ul className='comments'>
+          {store.comments.map(comment => (
+            <li className='comment' key={comment._id}>
+              <span>{comment.text}</span>
+              <span className='comment-deleter' onClick={() => store.deleteComment(comment._id)}>X</span>
+            </li>
+          ))}
         </ul>
+        <div className='comment-adder'>
+          <textarea value={store.commentText} onChange={this.onChange} />
+          <span className='comment-adder-button' onClick={this.onClick}>Add Comment</span>
+        </div>
       </div>
     )
   }

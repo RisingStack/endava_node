@@ -1,13 +1,14 @@
 import { easyStore } from 'react-easy-state'
-import { fetchUsers, fetchUser, fetchCommentsForUser, addComment } from './api'
+import { remove as removeItems } from 'lodash'
+import { fetchUsers, fetchUser, fetchCommentsForUser, addComment, deleteComment } from './api'
 
 export default easyStore({
-  users: [],
   query: 'endava',
+  users: [],
+  userId: '',
   user: {},
   comments: [],
   commentText: '',
-  userId: '',
   loading: false,
   async getUsers () {
     this.loading = true
@@ -23,6 +24,12 @@ export default easyStore({
     this.loading = false
   },
   async addComment () {
-    await addComment({ text: this.commentText, user: this.userId })
+    const comment = await addComment({ text: this.commentText, user: this.userId })
+    this.comments.push(comment)
+    this.commentText = ''
+  },
+  async deleteComment (commentId) {
+    await deleteComment(commentId)
+    removeItems(this.comments, comment => comment._id === commentId)
   }
 })

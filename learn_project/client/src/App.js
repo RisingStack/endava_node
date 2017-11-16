@@ -10,7 +10,7 @@ class App extends Component {
     super()
     store.getUsers()
   }
-  
+
   onChange (ev) {
     store.query = ev.target.value
   }
@@ -24,8 +24,10 @@ class App extends Component {
             <Link to='/' onClick={store.getUsers}>Filter Users</Link>
           </nav>
 
-          <Route exact path='/' component={Users} />
-          <Route path='/comments/:userId' component={Comments} />
+          <div className='app-body'>
+            <Route exact path='/' component={Users} />
+            <Route path='/comments/:userId' component={Comments} />
+          </div>
         </div>
       </Router>
     )

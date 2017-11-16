@@ -15,15 +15,16 @@ function getCommentById (commentId) {
   return comments.findOne({ _id: new ObjectId(commentId) })
 }
 
-async function getCommentsForUser (userId) {
+function getCommentsForUser (userId) {
   const comments = db.connection.collection(COLLECTION_NAME)
   return comments.find({ user: userId }).toArray()
 }
 
-function addComment (comment) {
+async function addComment (comment) {
   comment = joi.attempt(comment, commentSchema)
   const comments = db.connection.collection(COLLECTION_NAME)
-  return comments.insertOne(comment)
+  await comments.insertOne(comment)
+  return comment
 }
 
 function deleteCommentById (commentId) {
