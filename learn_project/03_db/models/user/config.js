@@ -1,17 +1,17 @@
-'use strict'
-
 const joi = require('joi')
 
-const schema = joi.object({
-  USER_API_URL: joi.string().uri({ scheme: 'https' }).required()
-}).unknown().required()
-
-const envVars = joi.attempt(process.env, schema)
+const envVars = joi.attempt(
+  process.env,
+  joi.object({
+    USER_API_URL: joi.string().uri({ scheme: 'https' }).required(),
+    USER_API_TOKEN: joi.string().length(40).alphanum().required()
+  }).unknown().required()
+)
 
 module.exports = {
   baseURL: envVars.USER_API_URL,
-  timeout: 5000,
   headers: {
+    Authorization: `token ${USER_API_TOKEN}`,
     Accept: 'application/vnd.github.v3+json',
     'User-Agent': 'Endava-Training'
   }
