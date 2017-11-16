@@ -12,7 +12,10 @@ const { errorHandler } = require('./utils')
 const app = express()
 
 const cache = apicache.options({ redisClient: redis.connection }).middleware
-const cacheMiddleware = cache('30 minutes', (req, res) => req.method === 'GET')
+const cacheMiddleware = cache(
+  '30 minutes',
+  (req, res) => req.method === 'GET' && res.status === 200
+)
 
 app.use(cors())
 app.use(cacheMiddleware)

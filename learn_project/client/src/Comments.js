@@ -30,7 +30,7 @@ class Comments extends Component {
         <ul className='comments'>
           {store.comments.map(comment => (
             <li className='comment' key={comment._id}>
-              <span>{comment.text}</span>
+              <span dangerouslySetInnerHTML={{ __html: comment.text }}></span>
               <span className='comment-deleter' onClick={() => store.deleteComment(comment._id)}>X</span>
             </li>
           ))}
