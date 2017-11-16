@@ -6,7 +6,7 @@ const db = require('../db')
 const COLLECTION_NAME = 'comment'
 
 const commentSchema = joi.object({
-  user: joi.number().integer().required(),
+  user: joi.string().required(),
   text: joi.string().min(3).max(10000).required()
 }).required()
 

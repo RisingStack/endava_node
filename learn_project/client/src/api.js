@@ -22,10 +22,11 @@ export async function fetchCommentsForUser (userId) {
   return resp.data
 }
 
-export async function addComment () {
+export async function addComment (body) {
   const resp = await fetch({
     method: 'POST',
-    url: '/comments'
+    url: '/comments',
+    data: body
   })
   return resp.data
 }

@@ -1,11 +1,12 @@
 import { easyStore } from 'react-easy-state'
-import { fetchUsers, fetchUser, fetchCommentsForUser } from './api'
+import { fetchUsers, fetchUser, fetchCommentsForUser, addComment } from './api'
 
 export default easyStore({
   users: [],
   query: 'endava',
   user: {},
   comments: [],
+  commentText: '',
   userId: '',
   loading: false,
   async getUsers () {
@@ -20,5 +21,8 @@ export default easyStore({
     this.user = await fetchUser(this.userId)
     this.comments = await fetchCommentsForUser(this.userId)
     this.loading = false
+  },
+  async addComment () {
+    await addComment({ text: this.commentText, user: this.userId })
   }
 })

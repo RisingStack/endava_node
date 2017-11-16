@@ -8,11 +8,19 @@ class Comments extends Component {
     store.initComments(props.match.params.userId)
   }
 
+  onChange (ev) {
+    store.commentText = ev.target.value
+  }
+
+  onClick () {
+    store.addComment()
+  }
+
   render() {
     if (store.loading) {
       return null
     }
-    
+
     return (
       <div className='comments'>
         <div className="header">
@@ -21,6 +29,11 @@ class Comments extends Component {
         </div>
         <ul>
           {store.comments.map(comment => <li key={comment._id}>{comment.text}</li>)}
+          <li>
+            HI
+            <textarea value={store.commentText} onChange={this.onChange} />
+            <button onClick={this.onClick}>Add Comment</button>
+          </li>
         </ul>
       </div>
     )
