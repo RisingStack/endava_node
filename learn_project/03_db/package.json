@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test-unit": "NODE_ENV=test mocha ./test/setup.js ./**/*.unit.spec.js",
-    "test-e2e": "NODE_ENV=test mocha ./test/setup.js ./**/*.e2e.spec.js",
-    "test-unit-dev": "NODE_ENV=test mocha --watch ./test/setup.js ./**/*unit.spec.js",
+    "test-unit": "mocha ./test/setup.js ./**/*.unit.spec.js",
+    "test-e2e": "mocha ./test/setup.js ./**/*.e2e.spec.js",
+    "test-unit-dev": "mocha --watch ./test/setup.js ./**/*unit.spec.js",
     "test": "npm run test-unit && npm run test-e2e"
   },
   "keywords": [],
