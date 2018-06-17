@@ -11,7 +11,9 @@ const config = require('./config')
 
 const app = express()
 
-app.use(morgan(config.logFormat))
+if (config.logFormat !== 'none') {
+  app.use(morgan(config.logFormat))
+}
 app.use(cors())
 app.use(bodyParser.json())
 app.use(routes)

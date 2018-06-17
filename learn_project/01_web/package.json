@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "lint": "standard **/*.js",
-    "lint-fix": "standard **/*.js --fix"
+    "lint": "standard '**/*.js'",
+    "lint-fix": "standard '**/*.js' --fix"
   },
   "author": "",
   "license": "ISC",

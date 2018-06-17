@@ -1,6 +1,5 @@
 'use strict'
 
-const nock = require('nock')
 const { expect } = require('chai')
 const request = require('super-request')
 const server = require('../../server')

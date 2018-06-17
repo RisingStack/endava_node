@@ -9,7 +9,7 @@ const paramsSchema = joi.object({
 
 async function getCommentById (req, res) {
   const { commentId } = joi.attempt(req.params, paramsSchema)
-  const comment  = await commentModel.getCommentById(commentId)
+  const comment = await commentModel.getCommentById(commentId)
   res.send(comment)
 }
 

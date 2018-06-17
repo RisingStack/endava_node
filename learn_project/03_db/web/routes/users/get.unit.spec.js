@@ -1,6 +1,6 @@
 'use strict'
+/* eslint-disable no-unused-expressions */
 
-const nock = require('nock')
 const { expect } = require('chai')
 const sinon = require('sinon')
 const request = require('super-request')
@@ -20,11 +20,13 @@ describe('GET /api/v1/users', () => {
 
   it('should get the users from the user model', async () => {
     const getUsers = sandbox.stub(user, 'getUsers').returns({ users: [] })
-    const users = await request(server)
+    const resp = await request(server)
       .get('/api/v1/users?q=bo')
+      .json(true)
       .expect(200, { users: [] })
       .end()
 
     expect(getUsers).to.be.calledOnce
+    expect(resp.body).to.eql({ users: [] })
   })
 })

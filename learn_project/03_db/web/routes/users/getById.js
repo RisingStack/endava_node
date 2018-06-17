@@ -8,8 +8,8 @@ const paramsSchema = joi.object({
 }).required()
 
 async function getUserById (req, res) {
-  const { userId } = joi.attempt(req.params, paramsSchema)
-  const user = await userModel.getUserById(userId)
+  const params = joi.attempt(req.params, paramsSchema)
+  const user = await userModel.getUserById(params.userId)
   res.send(user)
 }
 

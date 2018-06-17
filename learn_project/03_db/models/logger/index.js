@@ -1,3 +1,3 @@
-'use strict';
+'use strict'
 
-module.exports = require('./logger.js');
+module.exports = require('./logger.js')

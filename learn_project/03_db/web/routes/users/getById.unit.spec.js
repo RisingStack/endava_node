@@ -1,6 +1,6 @@
 'use strict'
+/* eslint-disable no-unused-expressions */
 
-const nock = require('nock')
 const { expect } = require('chai')
 const sinon = require('sinon')
 const request = require('super-request')

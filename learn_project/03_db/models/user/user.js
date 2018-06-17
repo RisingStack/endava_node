@@ -1,6 +1,5 @@
 'use strict'
 
-const url = require('url')
 const axios = require('axios')
 const _ = require('lodash')
 const config = require('./config')
