@@ -1,9 +1,10 @@
 'use strict'
 
+const http = require('http')
 const promisify = require('es6-promisify')
 const server = require('./server')
 const config = require('./config')
-const http = require('http')
+const logger = require('../models/logger')
 
 // explain why graceful stop is important (order of components)
 process.on('SIGTERM', async () => {
@@ -17,11 +18,11 @@ async function init () {
   try {
     await initServer(config.port)
   } catch (err) {
-    console.error(`Couldn't init thess app: ${err}`)
+    logger.error(`Couldn't init thess app: ${err}`)
     // exit code for fatal exception
     process.exit(1)
   }
-  console.log(`App is listening on port ${config.port}`)
+  logger.info(`App is listening on port ${config.port}`)
 }
 
 const closeServer = promisify(server.close, server)
@@ -31,7 +32,7 @@ async function stop () {
   try {
     await closeServer()
   } catch (err) {
-    console.error(`Failed to close the server: ${err}`)
+    logger.error(`Failed to close the server: ${err}`)
     exitCode = 1
   }
   return exitCode
