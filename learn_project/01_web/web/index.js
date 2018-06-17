@@ -3,7 +3,6 @@
 const promisify = require('es6-promisify')
 const server = require('./server')
 const config = require('./config')
-const http = require('http')
 
 // explain why graceful stop is important (order of components)
 process.on('SIGTERM', async () => {

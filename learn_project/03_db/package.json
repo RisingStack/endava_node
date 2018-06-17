@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
+    "lint": "standard **/*.js",
+    "lint-fix": "standard **/*.js --fix",
     "test-unit": "mocha ./test/setup.js ./**/*.unit.spec.js",
     "test-e2e": "mocha ./test/setup.js ./**/*.e2e.spec.js",
     "test-unit-dev": "mocha --watch ./test/setup.js ./**/*unit.spec.js",
@@ -37,6 +39,12 @@
     "nodemon": "^1.12.1",
     "sinon": "^4.1.2",
     "sinon-chai": "^2.14.0",
+    "standard": "^11.0.1",
     "super-request": "^1.2.0"
+  },
+  "standard": {
+    "env": [
+      "mocha"
+    ]
   }
 }

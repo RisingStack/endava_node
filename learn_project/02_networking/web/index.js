@@ -1,6 +1,5 @@
 'use strict'
 
-const http = require('http')
 const promisify = require('es6-promisify')
 const server = require('./server')
 const config = require('./config')
