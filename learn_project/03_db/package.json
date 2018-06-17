@@ -12,7 +12,7 @@
     "test-e2e": "mocha ./test/setup.js ./**/*.e2e.spec.js",
     "test-unit-dev": "mocha --watch ./test/setup.js ./**/*unit.spec.js",
     "test": "npm run test-unit && npm run test-e2e",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint && npm run test-unit"
   },
   "keywords": [],
   "author": "",

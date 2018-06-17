@@ -11,8 +11,7 @@
     "test-unit": "mocha ./test/setup.js ./**/*.unit.spec.js",
     "test-e2e": "mocha ./test/setup.js ./**/*.e2e.spec.js",
     "test-unit-dev": "mocha --watch ./test/setup.js ./**/*unit.spec.js",
-    "test": "npm run test-unit && npm run test-e2e",
-    "precommit": "npm run lint"
+    "test": "npm run test-unit && npm run test-e2e"
   },
   "keywords": [],
   "author": "",
@@ -33,7 +32,6 @@
     "chai": "^4.1.2",
     "chai-subset": "^1.6.0",
     "dotenv": "^4.0.0",
-    "husky": "^0.14.3",
     "mocha": "^4.0.1",
     "nock": "^9.1.0",
     "nodemon": "^1.12.1",
