@@ -1,37 +1,52 @@
-import React, { Component } from 'react'
-import { easyComp } from 'react-easy-state'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import store from './store'
-import Users from './Users'
-import Comments from './Comments'
+import React, { Component, Fragment } from 'react';
+import { view, Router, params, route } from 'react-easy-stack';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import store from './store';
+import Users from './Users';
+import Comments from './Comments';
 
 class App extends Component {
-  constructor () {
-    super()
-    store.getUsers()
-  }
+  onChange = ev => (store.query = ev.target.value);
 
-  onChange (ev) {
-    store.query = ev.target.value
-  }
+  onKeyPress = ev => {
+    if (ev.key === 'Enter') {
+      route({ to: '/users', params: { query: store.query } });
+    }
+  };
+
+  onRoute = async ({ toPage }) => {
+    if (toPage === 'users') {
+      params.query = params.query || 'endava';
+      await store.getUsers();
+    } else if (toPage === 'comments') {
+      await store.getComments();
+    }
+  };
 
   render() {
     return (
-      <Router className="app">
-        <div>
-          <nav className="app-header">
-            <input onChange={this.onChange} value={store.query} placeholder="User name criteria ..." />
-            <Link to='/' onClick={store.getUsers}>Filter Users</Link>
-          </nav>
+      <Fragment>
+        <AppBar>
+          <Toolbar>
+            <input
+              onChange={this.onChange}
+              onKeyPress={this.onKeyPress}
+              defaultValue={params.query}
+              placeholder="Filter users ..."
+            />
+          </Toolbar>
+          {store.isLoading && <LinearProgress color="secondary" />}
+        </AppBar>
 
-          <div className='app-body'>
-            <Route exact path='/' component={Users} />
-            <Route path='/comments/:userId' component={Comments} />
-          </div>
-        </div>
-      </Router>
-    )
+        <Router defaultPage="users" onRoute={this.onRoute} className="app-body">
+          <Users page="users" />
+          <Comments page="comments" />
+        </Router>
+      </Fragment>
+    );
   }
 }
 
-export default easyComp(App)
+export default view(App);

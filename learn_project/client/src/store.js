@@ -1,35 +1,44 @@
-import { easyStore } from 'react-easy-state'
-import { remove as removeItems } from 'lodash'
-import { fetchUsers, fetchUser, fetchCommentsForUser, addComment, deleteComment } from './api'
+import { store, params } from 'react-easy-stack';
+import { remove as removeItems } from 'lodash';
+import {
+  fetchUsers,
+  fetchUser,
+  fetchCommentsForUser,
+  addComment,
+  deleteComment
+} from './api';
 
-export default easyStore({
-  query: 'endava',
+const appStore = store({
   users: [],
   userId: '',
   user: {},
   comments: [],
   commentText: '',
-  loading: false,
-  async getUsers () {
-    this.loading = true
-    this.users = await fetchUsers(this.query)
-    this.query = ''
-    this.loading = false
+  isLoading: false,
+  async getUsers() {
+    appStore.users = await fetchUsers(params.query);
   },
-  async initComments (userId) {
-    this.loading = true
-    this.userId = userId
-    this.user = await fetchUser(this.userId)
-    this.comments = await fetchCommentsForUser(this.userId)
-    this.loading = false
+  async getComments() {
+    appStore.user = await fetchUser(params.userId);
+    appStore.comments = await fetchCommentsForUser(params.userId);
   },
-  async addComment () {
-    const comment = await addComment({ text: this.commentText, user: this.userId })
-    this.comments.push(comment)
-    this.commentText = ''
+  async addComment() {
+    const comment = await addComment({
+      text: appStore.commentText,
+      user: params.userId
+    });
+    appStore.comments.push(comment);
+    appStore.commentText = '';
   },
-  async deleteComment (commentId) {
-    await deleteComment(commentId)
-    removeItems(this.comments, comment => comment._id === commentId)
+  async deleteComment(commentId) {
+    await deleteComment(commentId);
+    removeItems(appStore.comments, comment => comment._id === commentId);
+  },
+  startLoading() {
+    this.isLoading = true;
+  },
+  stopLoading() {
+    this.isLoading = false;
   }
-})
+});
+export default appStore;
