@@ -14,7 +14,7 @@ if (config.logFormat !== 'none') {
   app.use(morgan(config.logFormat))
 }
 app.use(cors())
-app.use(routes)
+app.use('/api/v1', routes)
 app.use(errorHandler)
 
 // create a http server from the app (this can be closed properly, unlike the express app)
