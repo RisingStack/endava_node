@@ -35,6 +35,7 @@ class App extends Component {
               onKeyPress={this.onKeyPress}
               defaultValue={params.query}
               placeholder="Filter users ..."
+              style={{ padding: '5px 15px', width: 300, borderRadius: 3 }}
             />
           </Toolbar>
           {store.isLoading && <LinearProgress color="secondary" />}
