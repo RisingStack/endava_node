@@ -1,6 +1,6 @@
 'use strict'
 
-const promisify = require('es6-promisify')
+const { promisify } = require('es6-promisify')
 const server = require('./server')
 const config = require('./config')
 
@@ -11,7 +11,7 @@ process.on('SIGTERM', async () => {
 })
 
 // do not init the process if a crucial component can not start up
-const initServer = promisify(server.listen, server)
+const initServer = promisify(server.listen.bind(server))
 async function init () {
   try {
     await initServer(config.port)
@@ -23,7 +23,7 @@ async function init () {
   console.log(`App is listening on port ${config.port}`)
 }
 
-const closeServer = promisify(server.close, server)
+const closeServer = promisify(server.close.bind(server))
 async function stop () {
   // start with a normal exit code
   let exitCode = 0
