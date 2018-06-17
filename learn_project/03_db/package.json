@@ -48,5 +48,5 @@
       "mocha"
     ]
   },
-  "pre-commit": ["lint", "test-unit"]
+  "precommit": ["lint", "test-unit"]
 }
