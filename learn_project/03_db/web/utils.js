@@ -9,7 +9,7 @@ function catchAsyncErrors (middleware) {
 }
 
 function errorHandler (err, req, res, next) {
-  logger.error(err)
+  logger.error(err.stack)
   if (err.isJoi) {
     const message = err.details.map(detail => detail.message).join(', ')
     res.status(400).send(`Invalid format: ${message}`)
