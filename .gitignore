@@ -62,3 +62,5 @@ typings/
 # IntelliJ project files
 .idea
 *.iml
+
+env.html
