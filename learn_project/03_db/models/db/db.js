@@ -3,20 +3,25 @@
 const { MongoClient } = require('mongodb')
 const config = require('./config')
 
-const db = {
-  init,
-  close
-}
+let client
 
 async function init () {
-  db.connection = await MongoClient.connect(config.uri)
+  client = await MongoClient.connect(config.uri)
 }
 
 async function close () {
-  if (db.connection) {
-    await db.connection.close()
+  if (client) {
+    await client.close()
+    client = undefined
   }
-  db.connection = undefined
 }
 
-module.exports = db
+function collection (collectionName) {
+  return client.db(config.name).collection(collectionName)
+}
+
+module.exports = {
+  init,
+  close,
+  collection
+}
